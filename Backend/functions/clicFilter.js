@@ -1,4 +1,4 @@
-Testestes
+
 
 import { cleanElements } from "./cleanElement.js";
 import { creationFigureElement } from "./initializationCreationFigureElement.js";
