@@ -1,0 +1,17 @@
+
+
+export const selectTousFilter = (i) => {
+  if (selectLi[i].innerText.includes("Tous")) {
+    cleanElements();
+    selectLi[i].classList.add("selected");
+    for (let i = 1; i < categories.length + 1; i++) {
+      selectLi[i].classList.remove("selected");
+      selectLi[i].classList.add("unselected");
+    }
+    // creationFigureElement();
+  }
+};
+
+export default selectTousFilter;
+
+// export  selectTousFilter;

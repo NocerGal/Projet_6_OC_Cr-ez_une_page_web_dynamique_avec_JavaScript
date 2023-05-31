@@ -198,3 +198,63 @@ footer nav ul {
 	text-decoration: none;
 	color: black;
 }
+
+#portfolio nav {
+	margin: 51px auto;
+	width: 30%;
+
+}
+
+#portfolio nav ul{
+	display: flex;
+	justify-content: space-around;
+}
+
+.filter{
+	cursor: pointer;
+}
+
+.selected{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #1D6154;
+	background:#1D6154;
+	border-radius: 60px;
+	color: #FFFFFF;
+	font-size: 1rem ;
+	min-width: 100px;
+	height: 37px;
+	line-height: 19px;
+	margin: 0 10px;
+}
+.selected:hover{
+	color:#FFFFFF;
+}
+
+.unselected{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #1D6154;
+	background:#FFFFFF;
+	border-radius: 60px;
+	color: #1D6154;
+	font-size: 1rem ;
+	min-width: 100px;
+	height: 37px;
+	line-height: 19px;
+	margin: 0 10px;
+	cursor: pointer;
+	transition: 125ms ease-in-out;
+}
+
+.unselected:hover{
+	background: #1D6154;
+	color: #FFFFFF;
+}
+
+
+
+
+
