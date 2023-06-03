@@ -1,15 +1,18 @@
-const emailToLogin = document.querySelector('form input[type="email"]').value;
-const passwordToLogin = document.querySelector(
-  'form input[type="password'
-).value;
-const submitButton = document.querySelector('form input[type="submit"]');
+const submitButton = document.querySelector("form");
 
 // sophie.bluel@test.tld
 // S0phie
 
+submitButton.addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const data = new FormData(form);
+  const email = data.get("email");
+  const password = data.get("password");
+
   let user = {
-    email: "sophie.bluel@test.tld",
-    password: "S0phie",
+    email: email,
+    password: password,
   };
 
   let response = await fetch("http://localhost:5678/api/users/login", {
@@ -19,11 +22,12 @@ const submitButton = document.querySelector('form input[type="submit"]');
     },
     body: JSON.stringify(user),
   });
-  let result = await response.json();
-  let token = result.token;
-  console.log(token);
-  console.log(result.id)
 
+  const responseHtml = response.status;
 
-
-submitButton.addEventListener("click", handleClick);
+  if (responseHtml != 200) {
+    alert("Error " + responseHtml + " : Email ou Mot de passe Incorrect");
+  } else {
+    window.location.replace("./homepage_edit.html");
+  }
+});
