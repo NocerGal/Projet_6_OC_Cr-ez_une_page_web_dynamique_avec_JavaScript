@@ -1,9 +1,9 @@
-const submitButton = document.querySelector("form");
+const formLogin = document.querySelector("form");
 
 // sophie.bluel@test.tld
 // S0phie
 
-submitButton.addEventListener("submit", async (e) => {
+formLogin.addEventListener("submit", async (e) => {
   const form = e.currentTarget;
   const data = new FormData(form);
   const email = data.get("email");
@@ -28,10 +28,12 @@ submitButton.addEventListener("submit", async (e) => {
 
   if (responseHtml != 200) {
     alert("Error " + responseHtml + " : Email ou Mot de passe Incorrect");
+    e.preventDefault();
   } else {
     console.log(responseHtml);
     window.sessionStorage.setItem("token", token);
     window.sessionStorage.setItem("id", id);
     window.location.replace("./homepage_edit.html");
   }
+  e.preventDefault();
 });
