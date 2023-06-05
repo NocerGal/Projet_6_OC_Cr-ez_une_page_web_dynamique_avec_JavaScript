@@ -4,6 +4,7 @@ const formLogin = document.querySelector("form");
 // S0phie
 
 formLogin.addEventListener("submit", async (e) => {
+  e.preventDefault();
   const form = e.currentTarget;
   const data = new FormData(form);
   const email = data.get("email");
