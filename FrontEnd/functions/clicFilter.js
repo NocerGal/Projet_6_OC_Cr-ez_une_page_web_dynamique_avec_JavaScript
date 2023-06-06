@@ -10,13 +10,14 @@ function selectOnly(buttonFilter) {
 
 function selectImgagesWithCategory(buttonFilter) {
   cleanElements();
+
   if (buttonFilter != "Tous") {
     const picsRegardingFilter = photos.filter(
       (photo) => photo.category.name == buttonFilter
     );
-    creationFigureElement(picsRegardingFilter);
+    creationFigureElement(picsRegardingFilter, ".gallery");
   } else {
-    creationFigureElement(photos);
+    creationFigureElement(photos, ".gallery");
   }
 }
 
