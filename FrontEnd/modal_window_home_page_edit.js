@@ -1,3 +1,8 @@
+import {
+  generationCurrentPhotoGallery,
+  cleanPhotoGallery,
+} from "./functions/modal_galery.js";
+
 let modal = null;
 const focusableSelector = "button, a, input, textaerea";
 let focusables = [];
@@ -6,6 +11,7 @@ let previouslyFocusedElement = null;
 const openModal = function (e) {
   // preventdefautl car on ne veut pas que le click sur le lien fonctionne correctement.
   e.preventDefault();
+  generationCurrentPhotoGallery();
   modal = document.querySelector(e.target.getAttribute("href"));
   focusables = Array.from(modal.querySelectorAll(focusableSelector));
   previouslyFocusedElement = document.querySelector(":focus");
@@ -24,6 +30,7 @@ const closeModal = function (e) {
   if (modal === null) return;
   if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
   e.preventDefault();
+  cleanPhotoGallery();
   modal.setAttribute("aria-hidden", "true");
   modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);

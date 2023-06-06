@@ -390,13 +390,17 @@ footer ul {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s both;
 }
 
 .modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow: auto;
-  width: 600px;
+  width: 630px;
+  height: 731px;
   max-width: calc(100vw - 20px);
   max-height: calc(100vh - 20px);
   padding: 20px;
@@ -411,6 +415,74 @@ footer ul {
 .modal1[aria-hidden="true"] .modal-wrapper {
   animation-name: slideToBottom;
 }
+
+.js-modal-close {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+}
+
+.js-modal-close i {
+  margin-right: 0;
+  position: relative;
+  padding: 5px 8px 5px 9px;
+}
+
+.js-modal-close:hover {
+  background: #d65353;
+  color: white;
+}
+
+h3 {
+  color: black;
+  text-align: center;
+  margin-top: 40px;
+  font-family: "Work Sans";
+  font-weight: 400;
+  font-size: 26px;
+}
+
+.modal-wrapper .filter {
+  text-align: center;
+  font-weight: 700;
+  width: 237px;
+  font-family: "Syne";
+  position: relative;
+}
+
+.modal-wrapper .filter:before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 1px;
+  background: #b3b3b3;
+  top: -38px;
+}
+
+.js-delete-galery {
+  font-family: "Syne";
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #d65353;
+  margin-top: 23px;
+  cursor: pointer;
+  transition: ease 0.2s;
+}
+
+.js-delete-galery:hover {
+  font-size: 0.935rem;
+}
+
 *:focus {
   box-shadow: 0 0 10px blue;
 }
@@ -449,4 +521,33 @@ footer ul {
   to {
     transform: translateY(50px);
   }
+}
+
+#galery-modal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 84px 42px;
+}
+
+#galery-modal figure img {
+  width: 78px;
+  height: 104px;
+  cursor: pointer;
+}
+
+#galery-modal figure figcaption {
+  color: black;
+  font-family: "Work Sans";
+  font-weight: 400;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin-top: 7px;
+  margin-bottom: 13px;
+  transition: ease-in-out 0.09s;
+}
+
+#galery-modal figure figcaption:hover {
+  font-size: 0.85rem;
+  margin-bottom: 0;
 }
