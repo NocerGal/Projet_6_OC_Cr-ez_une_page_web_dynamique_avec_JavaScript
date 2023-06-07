@@ -406,6 +406,7 @@ footer ul {
   padding: 20px;
   background-color: #ffffff;
   animation: slideFromTop 0.5s both;
+  border-radius: 10px;
 }
 
 .modal1[aria-hidden="true"] {
@@ -530,6 +531,18 @@ h3 {
   padding: 0 84px 42px;
 }
 
+#galery-modal figure {
+  position: relative;
+  transition: ease-in-out 0.2s;
+  margin-top: 11px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+#galery-modal figure:hover {
+  box-shadow: 0px 0px 11px 0px #1d6154;
+}
+
 #galery-modal figure img {
   width: 78px;
   height: 104px;
@@ -543,11 +556,36 @@ h3 {
   font-size: 0.75rem;
   cursor: pointer;
   margin-top: 7px;
-  margin-bottom: 13px;
-  transition: ease-in-out 0.09s;
+  /* padding-bottom: 13px; */
 }
 
 #galery-modal figure figcaption:hover {
-  font-size: 0.85rem;
-  margin-bottom: 0;
+  text-decoration: underline;
+}
+
+#galery-modal .js-edit-icones {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#galery-modal .js-edit-icones div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 12px;
+  width: 12px;
+  background: black;
+  border-radius: 2px;
+  margin-right: 0;
+  margin-left: 3px;
+}
+
+#galery-modal .js-edit-icones i {
+  font-size: 8px;
+  margin-right: 0;
+  text-align: center;
 }
