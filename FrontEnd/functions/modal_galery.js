@@ -6,44 +6,38 @@ export function generationCurrentPhotoGallery() {
 
   creationFigureElement(photos, selectModalGalery);
 
-  const allFigationOfPicturesInEditionGallery = document.querySelectorAll(
-    "#galery-modal figure figcaption"
-  );
-  allFigationOfPicturesInEditionGallery.forEach(
-    (figaption) => (figaption.innerHTML = "éditer")
-  );
+  document
+    .querySelectorAll("#galery-modal figure figcaption")
+    .forEach((figaption) => (figaption.innerHTML = "éditer"));
 
-  function generationIcones(figure) {
-    const currentFigure = figure;
-    const creationIconeEditPics = document.createElement("div");
-    const trashDiv = document.createElement("div");
-    const multiCrossDiv = document.createElement("div");
-    const creationTrashIcon = document.createElement("i");
-    const creationMultiCross = document.createElement("i");
+  document
+    .querySelectorAll("#galery-modal figure")
+    .forEach((figure) => generateIcons(figure));
+}
 
-    creationIconeEditPics.classList = "js-edit-icones";
-    trashDiv.classList = "js-trash-div";
-    multiCrossDiv.classList = "js-multicross-div";
-    creationTrashIcon.classList = "fa-solid fa-trash-can";
-    creationMultiCross.classList = "fa-solid fa-arrows-up-down-left-right";
+function generateIcons(currentFigure) {
+  const creationIconeEditPics = document.createElement("div");
+  const trashDiv = document.createElement("div");
+  const multiCrossDiv = document.createElement("div");
+  const creationTrashIcon = document.createElement("i");
+  const creationMultiCross = document.createElement("i");
 
-    trashDiv.appendChild(creationTrashIcon);
-    multiCrossDiv.appendChild(creationMultiCross);
-    creationIconeEditPics.appendChild(trashDiv);
-    creationIconeEditPics.appendChild(multiCrossDiv);
+  creationIconeEditPics.classList = "modal-pics-edition";
+  trashDiv.classList = "modal-trash-icon";
+  multiCrossDiv.classList = "modal-multicross-icon";
+  creationTrashIcon.classList = "fa-solid fa-trash-can";
+  creationMultiCross.classList = "fa-solid fa-arrows-up-down-left-right";
 
-    currentFigure.appendChild(creationIconeEditPics);
-    // function pour ajouter les icones à chaque photo de la galerie
-  }
+  trashDiv.appendChild(creationTrashIcon);
+  multiCrossDiv.appendChild(creationMultiCross);
+  creationIconeEditPics.appendChild(trashDiv);
+  creationIconeEditPics.appendChild(multiCrossDiv);
 
-  const figuresSelected = document.querySelectorAll("#galery-modal figure");
-
-  figuresSelected.forEach((figure) => generationIcones(figure));
+  currentFigure.appendChild(creationIconeEditPics);
 }
 
 export function cleanPhotoGallery() {
-  const allPicturesInEditionGallery = document.querySelectorAll(
-    "#galery-modal figure"
-  );
-  allPicturesInEditionGallery.forEach((photos) => photos.remove());
+  document
+    .querySelectorAll("#galery-modal figure")
+    .forEach((photos) => photos.remove());
 }

@@ -1,6 +1,6 @@
-export function creationFigureElement(picsRegardingFilter, gallery) {
+export function creationFigureElement(picsRegardingFilter, container) {
   for (let i = 0; i < picsRegardingFilter.length; i++) {
-    const selectGallery = document.querySelector(gallery);
+    const selectGallery = document.querySelector(container);
 
     const figureElement = document.createElement("figure");
     const imageElement = document.createElement("img");

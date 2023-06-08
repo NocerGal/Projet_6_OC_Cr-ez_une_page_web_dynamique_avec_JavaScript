@@ -21,11 +21,25 @@ const openModal = function (e) {
   modal.setAttribute("aria-modal", "true");
   // Permet lorsqu'on click en dehors de la fenêtre modal de fermer la fen^etre modale
   modal.addEventListener("click", closeModal);
-  modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
+  modal.querySelector(".modal-close").addEventListener("click", closeModal);
   modal
-    .querySelector(".js-modal-stop")
+    .querySelector(".modal-wrapper")
     .addEventListener("click", stopPropagation);
+  modal
+    .querySelectorAll(".modal-trash-icon")
+    .forEach((picture) => picture.addEventListener("click", deletePicture));
 };
+
+const deletePicture = function (e) {
+  let target = e.target;
+  const allTrash = document.querySelectorAll(".modal-trash-icon");
+  const focusablesTrash = Array.from(allTrash);
+  let indexTrash = focusablesTrash.findIndex(
+    (f) => f === querySelector(".modal-trash-icon")
+  );
+  console.log(indexTrash);
+};
+
 const closeModal = function (e) {
   if (modal === null) return;
   if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
@@ -34,11 +48,9 @@ const closeModal = function (e) {
   modal.setAttribute("aria-hidden", "true");
   modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);
+  modal.querySelector(".modal-close").removeEventListener("click", closeModal);
   modal
-    .querySelector(".js-modal-close")
-    .removeEventListener("click", closeModal);
-  modal
-    .querySelector(".js-modal-stop")
+    .querySelector(".modal-wrapper")
     .addEventListener("click", stopPropagation);
   const hideModal = function () {
     modal.style.display = "none";
@@ -70,7 +82,7 @@ const focusInModal = function (e) {
   focusables[index].focus();
 };
 
-document.querySelectorAll(".js-modal").forEach((a) => {
+document.querySelectorAll(".edit-portfolio").forEach((a) => {
   a.addEventListener("click", openModal);
 });
 
