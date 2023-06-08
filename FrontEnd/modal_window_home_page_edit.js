@@ -2,11 +2,14 @@ import {
   generationCurrentPhotoGallery,
   cleanPhotoGallery,
 } from "./functions/modal_galery.js";
+import { logout } from "./functions/logout.js";
 
 let modal = null;
 const focusableSelector = "button, a, input, textaerea";
 let focusables = [];
 let previouslyFocusedElement = null;
+
+logout();
 
 const openModal = function (e) {
   // preventdefautl car on ne veut pas que le click sur le lien fonctionne correctement.
