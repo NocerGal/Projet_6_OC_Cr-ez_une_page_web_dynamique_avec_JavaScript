@@ -300,6 +300,7 @@ input[type="submit"] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
+  cursor: pointer;
 }
 
 footer nav ul {
@@ -612,4 +613,17 @@ h3 {
 
 #galery-modal figure figcaption:hover {
   text-decoration: underline;
+}
+
+form span {
+  margin-top: 12px;
+  color: #d65353;
+  font-weight: bold;
+}
+
+form .html-error {
+  text-align: center;
+  font-size: 20px;
+  font-family: "Syne";
+  margin-top: 33px;
 }

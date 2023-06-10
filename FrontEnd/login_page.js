@@ -1,3 +1,4 @@
+import { errorConnexion } from "./functions/errorConnexion.js";
 const formLogin = document.querySelector("form");
 
 // sophie.bluel@test.tld
@@ -28,13 +29,12 @@ formLogin.addEventListener("submit", async (e) => {
   const responseHtml = response.status;
 
   if (responseHtml != 200) {
-    alert("Error " + responseHtml + " : Email ou Mot de passe Incorrect");
     e.preventDefault();
   } else {
-    console.log(responseHtml);
     window.sessionStorage.setItem("token", token);
     window.sessionStorage.setItem("id", id);
     window.location.replace("./homepage_edit.html");
   }
-  e.preventDefault();
+
+  errorConnexion(responseHtml, email, password);
 });
