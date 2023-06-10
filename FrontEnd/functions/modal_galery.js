@@ -1,5 +1,6 @@
 import { photos } from "./constants/index.js";
 import { creationFigureElement } from "./initializationCreationFigureElement.js";
+import { erasePicture } from "./erasePicture.js";
 
 export function generationCurrentPhotoGallery() {
   const selectModalGalery = "#galery-modal";
@@ -27,6 +28,16 @@ function generateIcons(currentFigure) {
   multiCrossDiv.classList = "modal-multicross-icon";
   creationTrashIcon.classList = "fa-solid fa-trash-can";
   creationMultiCross.classList = "fa-solid fa-arrows-up-down-left-right";
+
+  trashDiv.addEventListener("click", function (e) {
+    erasePicture(e);
+  });
+
+  multiCrossDiv.addEventListener("click", function (e) {
+    let indexOfMultiCross = Array.from(
+      document.querySelectorAll(".fa-arrows-up-down-left-right")
+    ).indexOf(e.target);
+  });
 
   trashDiv.appendChild(creationTrashIcon);
   multiCrossDiv.appendChild(creationMultiCross);

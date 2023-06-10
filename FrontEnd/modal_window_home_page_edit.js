@@ -3,16 +3,17 @@ import {
   cleanPhotoGallery,
 } from "./functions/modal_galery.js";
 import { logout } from "./functions/logout.js";
+import { photos } from "./functions/constants/index.js";
 
 let modal = null;
 const focusableSelector = "button, a, input, textaerea";
 let focusables = [];
 let previouslyFocusedElement = null;
+let portfolioRefreshed = photos;
 
 logout();
 
 const openModal = function (e) {
-  // preventdefautl car on ne veut pas que le click sur le lien fonctionne correctement.
   e.preventDefault();
   generationCurrentPhotoGallery();
   modal = document.querySelector(e.target.getAttribute("href"));
@@ -28,19 +29,6 @@ const openModal = function (e) {
   modal
     .querySelector(".modal-wrapper")
     .addEventListener("click", stopPropagation);
-  modal
-    .querySelectorAll(".modal-trash-icon")
-    .forEach((picture) => picture.addEventListener("click", deletePicture));
-};
-
-const deletePicture = function (e) {
-  let target = e.target;
-  const allTrash = document.querySelectorAll(".modal-trash-icon");
-  const focusablesTrash = Array.from(allTrash);
-  let indexTrash = focusablesTrash.findIndex(
-    (f) => f === querySelector(".modal-trash-icon")
-  );
-  console.log(indexTrash);
 };
 
 const closeModal = function (e) {
