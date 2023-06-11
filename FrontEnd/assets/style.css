@@ -632,14 +632,17 @@ form .html-error {
   text-decoration: none;
   color: black;
 }
-
-.fa-arrow-left {
+.add-picture a {
   position: absolute;
   left: 30px;
   top: 25px;
-  margin-right: 0;
   cursor: pointer;
+}
+
+a .fa-arrow-left {
+  margin-right: 0;
   font-size: 21px;
+  color: black;
 }
 
 .fa-arrow-left:hover {

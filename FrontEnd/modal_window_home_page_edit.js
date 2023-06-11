@@ -3,7 +3,6 @@ import {
   cleanPhotoGallery,
 } from "./functions/modal_galery.js";
 import { logout } from "./functions/logout.js";
-import { photos } from "./functions/constants/index.js";
 
 let modal = null;
 const focusableSelector = "button, a, input, textaerea";
@@ -14,6 +13,7 @@ logout();
 
 const openModal = function (e) {
   e.preventDefault();
+  cleanPhotoGallery();
   generationCurrentPhotoGallery();
   modal = document.querySelector(e.target.getAttribute("href"));
   focusables = Array.from(modal.querySelectorAll(focusableSelector));
@@ -23,7 +23,6 @@ const openModal = function (e) {
   modal.removeAttribute("aria-hidden");
   modal.setAttribute("aria-modal", "true");
   modal.querySelector(".add-pics").addEventListener("click", function () {
-    console.log("ok");
     modal.removeAttribute("arria-hidden");
     modal.style.display = "none";
     document.querySelector(".add-picture").style.display = null;
@@ -93,23 +92,3 @@ window.addEventListener("keydown", function (e) {
     focusInModal(e);
   }
 });
-
-// Code non testé permettant théoriquement d'ajouter une photo
-function addNewPicture(newPicture) {
-  let listPhotos = getPhotos();
-  listPhotos.push(newPicture);
-  saveNewPhoto(listPhotos);
-}
-
-function getPortfolioPhotos() {
-  let listPhotos = localStorage.getItem("listpPhotos");
-  if (listPhotos == null) {
-    return [];
-  } else {
-    return JSON.parse(listPhotos);
-  }
-}
-
-function saveNewPhoto(listPhotos) {
-  localStorage.setItem("listpPhotos", JSON.stringify(listPhotos));
-}
