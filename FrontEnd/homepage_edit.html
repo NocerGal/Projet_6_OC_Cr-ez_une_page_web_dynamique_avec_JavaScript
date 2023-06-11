@@ -76,17 +76,42 @@
         <h2>Mes Projets</h2> 
         <span class="edition-mode">
           <i class="fa-solid fa-pen-to-square"></i>
-          <a href ="#modal1" class="edit-portfolio">modifier</a>
+          <a href ="#modal" class="edit-portfolio">modifier</a>
         </span>
         </div>
-        <aside id = "modal1" class="modal1" aria-hidden="true" role="dialog" aria-moda="false" style="display:none">
+        <aside id = "modal" class="modal" aria-hidden="true" role="dialog" aria-moda="false" style="display:none">
           <div class="modal-wrapper">
             <button class="modal-close"><i class="fa-solid fa-xmark" title="fermeture de la fenêter modal"></i></button>
             <h3>Galerie photo</h3>
             <section id="galery-modal"></section>
-            <button class="filter">Ajouter des photos</button>
+            <button class="filter add-pics">Ajouter des photos</button>
             <span class="delete-galery">Supprimer la galerie</span>
           </div>
+        </aside>
+        <aside id = "modal" class="modal add-picture" aria-hidden="true" role="dialog" aria-moda="false" style="display:none" >
+          <div class="modal-wrapper">
+            <i class="fa-solid fa-arrow-left"></i>
+            <button class="modal-close"><i class="fa-solid fa-xmark" title="fermeture de la fenêter modal"></i></button>
+            <h3>Ajout photo</h3>
+            <div class="zone-add-picture">
+              <i class="fa-regular fa-image"></i>
+              <button>+ Ajouter photo</button>
+              <span>jpg, png : 4mo max</span>
+            </div>
+            <form>
+              <label for="titre">Titre</label>
+              <input type="text" name="titre" id="titre">
+              <label for="categorie">Categorie</label>
+              <select name="categorie" id="categorie">
+              <option disabled selected value>Choisissez une catégorie</option>
+              <option value="Objets">Objets</option>
+              <option value="Appartements">Appartements</option>
+              <option value="Hotels & restaurants">Hotels &  restaurants</option>
+              <input type="submit" value="Valider">
+            </select>
+            </form>
+          </div>
+          
         </aside>
         <nav>
           <ul>
