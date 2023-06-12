@@ -164,7 +164,6 @@ document
 
     addedPicture = e.target.files;
     imagePicture.push(addedPicture[0]);
-
     displayPictures();
   });
 
@@ -176,8 +175,4 @@ function displayPictures() {
   });
 }
 
-// document
-//   .querySelector(".add-picture form button")
-//   .addEventListener("click", function () {
-//     console.log("lol");
-//   });
+d;
