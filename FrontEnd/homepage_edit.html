@@ -121,7 +121,15 @@
             <h3>Ajout photo</h3>
             <div class="zone-add-picture">
               <i class="fa-regular fa-image"></i>
-              <button>+ Ajouter photo</button>
+              <label for="photo-upload" class="custom-photo-upload">
+                + Ajouter photo
+              </label>
+              <input
+                type="file"
+                id="photo-upload"
+                name="photo-upload"
+                accept="=image/png, image.jpg"
+              />
               <span>jpg, png : 4mo max</span>
             </div>
             <form>
@@ -135,7 +143,7 @@
                 <option value="Hotels & restaurants">
                   Hotels & restaurants
                 </option>
-                <input type="submit" value="Valider" />
+                <input type="button" value="Valider" />
               </select>
             </form>
           </div>

@@ -651,6 +651,7 @@ a .fa-arrow-left {
 
 .zone-add-picture {
   width: 420px;
+  height: 169px;
   margin-top: 36px;
   display: flex;
   flex-direction: column;
@@ -664,28 +665,9 @@ a .fa-arrow-left {
 .fa-image {
   color: rgba(185, 197, 204, 1);
   font-size: 100px;
-  margin-top: 20px;
-  margin-bottom: 21px;
-}
-
-.zone-add-picture button {
-  width: 173px;
-  border-radius: 50px;
-  margin-bottom: 7px;
-  text-align: center;
-  font-size: 0.875rem;
-  padding: 10px 0;
-  font-family: "Work Sans";
-  background: #cbd6dc;
-  color: rgba(48, 102, 133, 1);
-  border: none;
-  cursor: pointer;
-  transition: 125ms ease-in-out;
-}
-
-.zone-add-picture button:hover {
-  background: rgba(48, 102, 133, 1);
-  color: #cbd6dc;
+  font-size: 60px;
+  margin-bottom: 19px;
+  margin-top: 26px;
 }
 
 .zone-add-picture span {
@@ -725,7 +707,7 @@ a .fa-arrow-left {
   cursor: pointer;
 }
 
-.modal-wrapper input[type="submit"] {
+.modal-wrapper input[type="button"] {
   width: 237px;
   height: 36px;
   color: #ffffff;
@@ -734,16 +716,17 @@ a .fa-arrow-left {
   border-radius: 60px;
   font-family: "Syne";
   font-size: 0.875rem;
-  text-align: center;
   font-weight: 700;
   letter-spacing: 1px;
   padding: 0;
-  margin-top: 80px;
+  text-align: center;
   position: relative;
   transition: 125ms ease-in-out;
+  cursor: pointer;
+  margin: 80px auto 21px;
 }
 
-.modal-wrapper input[type="submit"]:hover {
+.modal-wrapper input[type="button"]:hover {
   background: rgb(128, 127, 127);
 }
 
@@ -754,4 +737,32 @@ a .fa-arrow-left {
   height: 1px;
   background: #b3b3b3;
   top: 585px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-photo-upload {
+  width: 173px;
+  border-radius: 50px;
+  margin-bottom: 7px;
+  text-align: center;
+  font-size: 0.875rem;
+  padding: 10px 0;
+  font-family: "Work Sans";
+  background: #cbd6dc;
+  color: rgba(48, 102, 133, 1);
+  border: none;
+  cursor: pointer;
+  transition: 125ms ease-in-out;
+}
+
+.zone-add-picture input[type="file"]:hover {
+  background: rgba(48, 102, 133, 1);
+  color: #cbd6dc;
+}
+
+.added-picture {
+  height: 100%;
 }

@@ -1,5 +1,6 @@
 import { cleanPhotoGallery } from "./functions/modal_galery.js";
 import { generationCurrentPhotoGallery } from "./functions/modal_galery.js";
+import { photos } from "./functions/constants/api.js";
 
 let modalAddPicture = null;
 let modal = null;
@@ -148,3 +149,35 @@ function getPortfolioPhotos() {
 function saveNewPhoto(listPhotos) {
   localStorage.setItem("listpPhotos", JSON.stringify(listPhotos));
 }
+
+let addedPicture = null;
+const newPicture = document.createElement("img");
+let imagePicture = [];
+
+document
+  .querySelector('.add-picture input[type="file"]')
+  .addEventListener("change", function (e) {
+    document.querySelector(".zone-add-picture i").style.display = "none";
+    document.querySelector(".zone-add-picture label").style.display = "none";
+    document.querySelector(".zone-add-picture span").style.display = "none";
+    e.target.display = "none";
+
+    addedPicture = e.target.files;
+    imagePicture.push(addedPicture[0]);
+
+    displayPictures();
+  });
+
+function displayPictures() {
+  imagePicture.forEach((image) => {
+    newPicture.src = URL.createObjectURL(image);
+    newPicture.classList = "added-picture";
+    document.querySelector(".zone-add-picture").appendChild(newPicture);
+  });
+}
+
+// document
+//   .querySelector(".add-picture form button")
+//   .addEventListener("click", function () {
+//     console.log("lol");
+//   });
