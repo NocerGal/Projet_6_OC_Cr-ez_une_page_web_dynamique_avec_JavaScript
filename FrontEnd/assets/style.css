@@ -707,7 +707,7 @@ a .fa-arrow-left {
   cursor: pointer;
 }
 
-.modal-wrapper input[type="button"] {
+.modal-wrapper input[type="submit"] {
   width: 237px;
   height: 36px;
   color: #ffffff;
@@ -726,7 +726,7 @@ a .fa-arrow-left {
   margin: 80px auto 21px;
 }
 
-.modal-wrapper input[type="button"]:hover {
+.modal-wrapper input[type="submit"]:hover {
   background: rgb(128, 127, 127);
 }
 
@@ -758,7 +758,7 @@ input[type="file"] {
   transition: 125ms ease-in-out;
 }
 
-.zone-add-picture input[type="file"]:hover {
+.custom-photo-upload:hover {
   background: rgba(48, 102, 133, 1);
   color: #cbd6dc;
 }

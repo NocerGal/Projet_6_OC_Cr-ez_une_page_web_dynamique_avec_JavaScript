@@ -1,6 +1,7 @@
 import { cleanPhotoGallery } from "./functions/modal_galery.js";
 import { generationCurrentPhotoGallery } from "./functions/modal_galery.js";
-import { photos } from "./functions/constants/api.js";
+import { photos, categories } from "./functions/constants/api.js";
+import { classPicture, classCategory } from "./classPicture.js";
 
 let modalAddPicture = null;
 let modal = null;
@@ -9,6 +10,11 @@ const focusableSelector = "button, a, input, textaerea";
 let previouslyFocusedElement = null;
 let currendModal = null;
 let previousModal = null;
+let addedPicture = null;
+const newPicture = document.createElement("img");
+let imagePicture = [];
+
+console.log(photos);
 
 const openModalAddPicture = function () {
   modal = document.querySelector("#modal");
@@ -130,30 +136,6 @@ window.addEventListener("keydown", function (e) {
   }
 });
 
-// Code non testé permettant théoriquement d'ajouter une photo
-export function addNewPicture(newPicture) {
-  let listPhotos = getPhotos();
-  listPhotos.push(newPicture);
-  saveNewPhoto(listPhotos);
-}
-
-function getPortfolioPhotos() {
-  let listPhotos = localStorage.getItem("listpPhotos");
-  if (listPhotos == null) {
-    return [];
-  } else {
-    return JSON.parse(listPhotos);
-  }
-}
-
-function saveNewPhoto(listPhotos) {
-  localStorage.setItem("listpPhotos", JSON.stringify(listPhotos));
-}
-
-let addedPicture = null;
-const newPicture = document.createElement("img");
-let imagePicture = [];
-
 document
   .querySelector('.add-picture input[type="file"]')
   .addEventListener("change", function (e) {
@@ -165,6 +147,7 @@ document
     addedPicture = e.target.files;
     imagePicture.push(addedPicture[0]);
     displayPictures();
+    console.log(addedPicture);
   });
 
 function displayPictures() {
@@ -175,4 +158,43 @@ function displayPictures() {
   });
 }
 
-d;
+document
+  .querySelector(".add-picture form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const tittle = data.get("titre");
+    const categorie = document.querySelector(".add-picture form select").value;
+    const id = photos.length + 1;
+    const imageUrl = document
+      .querySelector(".zone-add-picture img")
+      .getAttribute("src");
+    const indexCategorie = categories.findIndex(
+      (index) => index.name == categorie
+    );
+    const idCategories = indexCategorie + 1;
+    const userId = JSON.parse(sessionStorage.getItem("id"));
+    const nameObjet = categories[indexCategorie].name;
+
+    const newCategorie = new classCategory(idCategories, nameObjet);
+    const newPictureAdded = new classPicture(
+      id,
+      tittle,
+      imageUrl,
+      idCategories,
+      userId,
+      newCategorie
+    );
+    addNewPicture(newPictureAdded);
+  });
+
+// Code non testé permettant théoriquement d'ajouter une photo
+function addNewPicture(newPicture) {
+  let listPhotos = JSON.parse(sessionStorage.getItem("photosForGallery"));
+  sessionStorage.removeItem("photosForGallery");
+  listPhotos.push(newPicture);
+  sessionStorage.setItem("photosForGallery", JSON.stringify(listPhotos));
+  // saveNewPhoto(listPhotos);
+  console.log(listPhotos);
+}
