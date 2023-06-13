@@ -2,6 +2,7 @@ import { cleanPhotoGallery } from "./functions/modal_galery.js";
 import { generationCurrentPhotoGallery } from "./functions/modal_galery.js";
 import { photos, categories } from "./functions/constants/api.js";
 import { classPicture, classCategory } from "./classPicture.js";
+import { firstGenerationElements } from "./functions/generationFigureElements.js";
 
 let modalAddPicture = null;
 let modal = null;
@@ -13,8 +14,6 @@ let previousModal = null;
 let addedPicture = null;
 const newPicture = document.createElement("img");
 let imagePicture = [];
-
-console.log(photos);
 
 const openModalAddPicture = function () {
   modal = document.querySelector("#modal");
@@ -63,6 +62,12 @@ const closeModal = function (e) {
     modalAddPicture = null;
   };
   modalAddPicture.addEventListener("animationend", hideModal);
+
+  document
+    .querySelectorAll(".gallery figure")
+    .forEach((photo) => photo.remove());
+
+  firstGenerationElements();
 };
 
 const returnToPortfolioEdition = function (e) {
@@ -161,10 +166,10 @@ function displayPictures() {
 document
   .querySelector(".add-picture form")
   .addEventListener("submit", function (e) {
-    e.preventDefault();
+    // e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const tittle = data.get("titre");
+    const title = data.get("titre");
     const categorie = document.querySelector(".add-picture form select").value;
     const id = photos.length + 1;
     const imageUrl = document
@@ -180,7 +185,7 @@ document
     const newCategorie = new classCategory(idCategories, nameObjet);
     const newPictureAdded = new classPicture(
       id,
-      tittle,
+      title,
       imageUrl,
       idCategories,
       userId,
@@ -189,12 +194,8 @@ document
     addNewPicture(newPictureAdded);
   });
 
-// Code non testé permettant théoriquement d'ajouter une photo
 function addNewPicture(newPicture) {
   let listPhotos = JSON.parse(sessionStorage.getItem("photosForGallery"));
-  sessionStorage.removeItem("photosForGallery");
   listPhotos.push(newPicture);
   sessionStorage.setItem("photosForGallery", JSON.stringify(listPhotos));
-  // saveNewPhoto(listPhotos);
-  console.log(listPhotos);
 }

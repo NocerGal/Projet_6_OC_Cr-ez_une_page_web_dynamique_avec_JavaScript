@@ -5,7 +5,10 @@ import { erasePicture } from "./erasePicture.js";
 export function generationCurrentPhotoGallery() {
   const selectModalGalery = "#galery-modal";
 
-  creationFigureElement(photos, selectModalGalery);
+  creationFigureElement(
+    JSON.parse(sessionStorage.getItem("photosForGallery")),
+    selectModalGalery
+  );
 
   document
     .querySelectorAll("#galery-modal figure figcaption")
@@ -16,7 +19,7 @@ export function generationCurrentPhotoGallery() {
     .forEach((figure) => generateIcons(figure));
 }
 
-function generateIcons(currentFigure) {
+export function generateIcons(currentFigure) {
   const creationIconeEditPics = document.createElement("div");
   const trashDiv = document.createElement("div");
   const multiCrossDiv = document.createElement("div");

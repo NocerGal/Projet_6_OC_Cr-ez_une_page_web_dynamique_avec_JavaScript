@@ -1,8 +1,8 @@
 export class classPicture {
-  constructor(id, tittle, imageURL, categoryId, userId, category) {
+  constructor(id, title, imageUrl, categoryId, userId, category) {
     this.id = id;
-    this.tittle = tittle;
-    this.imageURL = imageURL;
+    this.title = title;
+    this.imageUrl = imageUrl;
     this.categoryId = categoryId;
     this.userId = userId;
     this.category = category;
