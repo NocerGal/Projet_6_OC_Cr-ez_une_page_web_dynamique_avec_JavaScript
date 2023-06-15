@@ -148,11 +148,10 @@ document
     document.querySelector(".zone-add-picture label").style.display = "none";
     document.querySelector(".zone-add-picture span").style.display = "none";
     e.target.display = "none";
-
     addedPicture = e.target.files;
+
     imagePicture.push(addedPicture[0]);
     displayPictures();
-    console.log(addedPicture);
   });
 
 function displayPictures() {
@@ -175,9 +174,7 @@ document
       JSON.parse(sessionStorage.getItem("photosForGallery")).length +
       JSON.parse(sessionStorage.getItem("photosToErase")).length +
       1;
-    const imageUrl = document
-      .querySelector(".zone-add-picture img")
-      .getAttribute("src");
+    const imageUrl = sessionStorage.getItem("stringPhotoToPublish");
     const indexCategorie = categories.findIndex(
       (index) => index.name == categorie
     );

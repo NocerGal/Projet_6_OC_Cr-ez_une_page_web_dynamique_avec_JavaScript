@@ -6,14 +6,9 @@ document.querySelector(".model-publish").addEventListener("click", () => {
 
   async function publishNewGallery(picture, index) {
     const formData = new FormData();
-    formData.append("id", 1);
     formData.append("title", "Bonjour");
-    formData.append(
-      "imageUrl",
-      "http://localhost:5678/images/la-balisiere1651287350102.png"
-    );
+    formData.append("image", "@image_123927839.JPG");
     formData.append("category", "2");
-    formData.append("userId", 1);
 
     let request = await fetch("http://localhost:5678/api/works", {
       method: "POST",
