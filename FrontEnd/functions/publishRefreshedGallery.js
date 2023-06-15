@@ -4,25 +4,28 @@ document.querySelector(".model-publish").addEventListener("click", () => {
     sessionStorage.getItem("photosToPublish")
   );
 
-  async function publishNewGallery(picture, index) {
-    const formData = new FormData();
-    formData.append("title", "Bonjour");
-    formData.append("image", "@image_123927839.JPG");
-    formData.append("category", "2");
-
-    let request = await fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-      body: formData,
-    });
-  }
-
   pictureToPublish.forEach((picture, index) =>
     publishNewGallery(picture, index)
   );
 });
+
+function publishNewGallery(picture, index) {
+  const formData = new FormData();
+  const fileInput = document.querySelector("#photo-upload");
+  formData.append("title", "Bonjour");
+  formData.append("image", fileInput.files[0]);
+  formData.append("category", "2");
+
+  let request = fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+    body: formData,
+  }).then((res) => {
+    console.log(res);
+  });
+}
 
 // `Bearer ${sessionStorage.getItem("token")}`
 // formData.append("categoryId", pictureToPublish[index].categoryId);
