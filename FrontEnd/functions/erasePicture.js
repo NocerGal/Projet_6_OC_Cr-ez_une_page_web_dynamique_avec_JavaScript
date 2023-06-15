@@ -1,4 +1,3 @@
-import { creationFigureElement } from "./initializationCreationFigureElement.js";
 import { generateIcons } from "./modal_galery.js";
 
 export function erasePicture(e) {
@@ -8,7 +7,10 @@ export function erasePicture(e) {
   let indexOfTrash = Array.from(
     document.querySelectorAll("#galery-modal .fa-trash-can")
   ).indexOf(e.target);
+
+  let idPictureToErase = sessionStorageGallery[indexOfTrash];
   sessionStorageGallery.splice(indexOfTrash, 1);
+
   sessionStorage.setItem(
     "photosForGallery",
     JSON.stringify(sessionStorageGallery)
@@ -39,6 +41,23 @@ export function erasePicture(e) {
 
     document.querySelector("#galery-modal").appendChild(galleryRefresh);
   }
+
+  // Partie stockage des photos id photos à supprimer
+
+  if (sessionStorage.getItem("photosToErase") === null) {
+    let arr = [];
+    arr.push(idPictureToErase);
+    sessionStorage.setItem("photosToErase", JSON.stringify(arr));
+  } else {
+    let listPhotosToErease = JSON.parse(
+      sessionStorage.getItem("photosToErase")
+    );
+
+    listPhotosToErease.push(idPictureToErase);
+
+    sessionStorage.setItem("photosToErase", JSON.stringify(listPhotosToErease));
+  }
+
   document
     .querySelectorAll("#galery-modal figure")
     .forEach((figure) => generateIcons(figure));

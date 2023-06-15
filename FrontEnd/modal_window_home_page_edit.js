@@ -3,6 +3,7 @@ import {
   cleanPhotoGallery,
 } from "./functions/modal_galery.js";
 import { logout } from "./functions/logout.js";
+import { creationFigureElement } from "./functions/initializationCreationFigureElement.js";
 
 let modal = null;
 const focusableSelector = "button, a, input, textaerea";
@@ -55,6 +56,15 @@ const closeModal = function (e) {
     modal = null;
   };
   modal.addEventListener("animationend", hideModal);
+
+  document
+    .querySelectorAll("#portfolio .gallery figure")
+    .forEach((picture) => picture.remove());
+
+  creationFigureElement(
+    JSON.parse(sessionStorage.getItem("photosForGallery")),
+    ".gallery"
+  );
 };
 
 const stopPropagation = function (e) {

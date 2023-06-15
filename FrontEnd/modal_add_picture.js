@@ -166,12 +166,15 @@ function displayPictures() {
 document
   .querySelector(".add-picture form")
   .addEventListener("submit", function (e) {
-    // e.preventDefault();
+    e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
     const title = data.get("titre");
     const categorie = document.querySelector(".add-picture form select").value;
-    const id = photos.length + 1;
+    const id =
+      JSON.parse(sessionStorage.getItem("photosForGallery")).length +
+      JSON.parse(sessionStorage.getItem("photosToErase")).length +
+      1;
     const imageUrl = document
       .querySelector(".zone-add-picture img")
       .getAttribute("src");
@@ -191,6 +194,29 @@ document
       userId,
       newCategorie
     );
+
+    if (sessionStorage.getItem("photosToPublish") === null) {
+      let arr = [];
+      arr.push(new classPicture(id, title, imageUrl, idCategories, userId));
+      sessionStorage.setItem("photosToPublish", JSON.stringify(arr));
+    } else {
+      const photoToPublish = new classPicture(
+        id,
+        title,
+        imageUrl,
+        idCategories,
+        userId
+      );
+      let listPhotoToPublish = JSON.parse(
+        sessionStorage.getItem("photosToPublish")
+      );
+      listPhotoToPublish.push(photoToPublish);
+      sessionStorage.setItem(
+        "photosToPublish",
+        JSON.stringify(listPhotoToPublish)
+      );
+    }
+
     addNewPicture(newPictureAdded);
   });
 
