@@ -1,3 +1,5 @@
+import { dataURLtoFile } from "./dataURLtoFile.js";
+
 document.querySelector(".model-publish").addEventListener("click", () => {
   const pictureToErase = JSON.parse(sessionStorage.getItem("photosToErase"));
   const pictureToPublish = JSON.parse(
@@ -11,10 +13,15 @@ document.querySelector(".model-publish").addEventListener("click", () => {
 
 function publishNewGallery(picture, index) {
   const formData = new FormData();
-  const fileInput = document.querySelector("#photo-upload");
-  formData.append("title", "Bonjour");
-  formData.append("image", fileInput.files[0]);
-  formData.append("category", "2");
+  const photo = JSON.parse(sessionStorage.getItem("photosToPublish"))[index]
+    .imageUrl;
+  const title = JSON.parse(sessionStorage.getItem("photosToPublish"))[index]
+    .title;
+  const category = JSON.parse(sessionStorage.getItem("photosToPublish"))[index]
+    .categoryId;
+  formData.append("image", dataURLtoFile(photo, "Bonjour Test"));
+  formData.append("title", title);
+  formData.append("category", category);
 
   let request = fetch("http://localhost:5678/api/works", {
     method: "POST",
@@ -26,22 +33,3 @@ function publishNewGallery(picture, index) {
     console.log(res);
   });
 }
-
-// `Bearer ${sessionStorage.getItem("token")}`
-// formData.append("categoryId", pictureToPublish[index].categoryId);
-// formData.append("userId", Number(sessionStorage.getItem("id")));
-
-// console.log(
-//   formData.append("userId", Number(sessionStorage.getItem("id")))
-// );
-
-// let request = new XMLHttpRequest();
-// request.open("POST", "http://localhost:5678/api/works");
-// request.send(formData);
-// let formData = {
-//   id: pictureToPublish[index].id,
-//   title: pictureToPublish[index].title,
-//   imageUrl: pictureToPublish[index].imageUrl,
-//   categoryId: pictureToPublish[index].categoryId,
-//   userId: Number(sessionStorage.getItem("id")),
-// };

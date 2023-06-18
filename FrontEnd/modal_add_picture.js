@@ -3,6 +3,7 @@ import { generationCurrentPhotoGallery } from "./functions/modal_galery.js";
 import { photos, categories } from "./functions/constants/api.js";
 import { classPicture, classCategory } from "./classPicture.js";
 import { firstGenerationElements } from "./functions/generationFigureElements.js";
+import { dataURLtoFile } from "./functions/dataURLtoFile.js";
 
 let modalAddPicture = null;
 let modal = null;
@@ -142,21 +143,39 @@ window.addEventListener("keydown", function (e) {
 });
 
 document
-  .querySelector('.add-picture input[type="file"]')
+  .querySelector(".add-picture #photo-upload")
   .addEventListener("change", function (e) {
     document.querySelector(".zone-add-picture i").style.display = "none";
     document.querySelector(".zone-add-picture label").style.display = "none";
     document.querySelector(".zone-add-picture span").style.display = "none";
     e.target.display = "none";
     addedPicture = e.target.files;
+    // imagePicture.push(addedPicture[0]);
 
-    imagePicture.push(addedPicture[0]);
-    displayPictures();
+    // ====================================
+    const reader = new FileReader();
+
+    const files = this.files[0];
+
+    imagePicture.push(files);
+    console.log(reader.readAsDataURL(this.files[0]));
+    sessionStorage.setItem("preview-image", reader.result);
+
+    reader.addEventListener("load", () => {
+      console.log(files);
+      sessionStorage.setItem("preview-image", reader.result);
+      const fileString = sessionStorage.getItem("preview-image");
+      console.log(fileString);
+      console.log(dataURLtoFile(fileString, "Stop"));
+
+      displayPictures();
+    });
+    // ====================================
   });
 
 function displayPictures() {
-  imagePicture.forEach((image) => {
-    newPicture.src = URL.createObjectURL(image);
+  imagePicture.forEach(() => {
+    newPicture.src = sessionStorage.getItem("preview-image");
     newPicture.classList = "added-picture";
     document.querySelector(".zone-add-picture").appendChild(newPicture);
   });
@@ -165,7 +184,6 @@ function displayPictures() {
 document
   .querySelector(".add-picture form")
   .addEventListener("submit", function (e) {
-    e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
     const title = data.get("titre");
@@ -176,12 +194,11 @@ document
     } else {
       indexPhotosToErase = sessionStorage.getItem("photosToErase").length;
     }
-
     const id =
       JSON.parse(sessionStorage.getItem("photosForGallery")).length +
       indexPhotosToErase +
       1;
-    const imageUrl = sessionStorage.getItem("stringPhotoToPublish");
+    const imageUrl = sessionStorage.getItem("preview-image");
     const indexCategorie = categories.findIndex(
       (index) => index.name == categorie
     );
