@@ -170,9 +170,16 @@ document
     const data = new FormData(form);
     const title = data.get("titre");
     const categorie = document.querySelector(".add-picture form select").value;
+    let indexPhotosToErase;
+    if (JSON.parse(sessionStorage.getItem("photosToErase")) === null) {
+      indexPhotosToErase = 0;
+    } else {
+      indexPhotosToErase = sessionStorage.getItem("photosToErase").length;
+    }
+
     const id =
       JSON.parse(sessionStorage.getItem("photosForGallery")).length +
-      JSON.parse(sessionStorage.getItem("photosToErase")).length +
+      indexPhotosToErase +
       1;
     const imageUrl = sessionStorage.getItem("stringPhotoToPublish");
     const indexCategorie = categories.findIndex(
