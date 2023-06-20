@@ -21,11 +21,11 @@ const openModal = function (e) {
   modal.style.display = null;
   modal.removeAttribute("aria-hidden");
   modal.setAttribute("aria-modal", "true");
-
+  modal.querySelector(".add-pics").addEventListener("click", removeModal);
   // Permet lorsqu'on click en dehors de la fenêtre modal de fermer la fen^etre modale
   modal.addEventListener("click", closeModal);
   modal.querySelector(".modal-close").addEventListener("click", closeModal);
-  modal.querySelector(".add-pics").addEventListener("click", removeModal);
+
   modal
     .querySelector(".modal-wrapper")
     .addEventListener("click", stopPropagation);
@@ -52,6 +52,7 @@ const closeModal = function (e) {
   };
   modal.addEventListener("animationend", hideModal);
 
+  console.log(modal);
   document
     .querySelectorAll("#portfolio .gallery figure")
     .forEach((picture) => picture.remove());

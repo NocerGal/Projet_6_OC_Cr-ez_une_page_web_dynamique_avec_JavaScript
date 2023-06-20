@@ -449,6 +449,20 @@ footer ul {
   animation: slideFromTop 0.5s both;
 }
 
+.add-picture .modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  width: 630px;
+  height: 670px;
+  max-width: calc(100vw - 20px);
+  max-height: calc(100vh - 20px);
+  padding: 20px;
+  background-color: #ffffff;
+  animation: slideFromTop 0.5s both;
+}
+
 .modal[aria-hidden="true"] {
   animation-name: fadeOut;
 }
@@ -466,9 +480,6 @@ footer ul {
   cursor: pointer;
   margin-right: 0;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: none;
   border-radius: 5px;
 }
@@ -643,10 +654,16 @@ a .fa-arrow-left {
   margin-right: 0;
   font-size: 21px;
   color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 6px;
+  border-radius: 5px;
 }
 
-.fa-arrow-left:hover {
-  font-weight: 900;
+a .fa-arrow-left:hover {
+  background: rgba(167, 167, 167, 1);
+  color: #fff;
 }
 
 .zone-add-picture {
@@ -735,7 +752,7 @@ a .fa-arrow-left {
   width: 420px;
   height: 1px;
   background: #b3b3b3;
-  top: 585px;
+  top: 547px;
 }
 
 input[type="file"] {
@@ -757,7 +774,7 @@ input[type="file"] {
   transition: 125ms ease-in-out;
 }
 
-.custom-photo-upload:hover {
+.zone-add-picture label:hover {
   background: rgba(48, 102, 133, 1);
   color: #cbd6dc;
 }

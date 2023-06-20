@@ -18,20 +18,23 @@ const openModalAddPicture = function () {
   modalAddPicture.style.display = null;
   modalAddPicture.removeAttribute("aria-hidden");
   modalAddPicture.setAttribute("aria-modal", "true");
-  document
-    .querySelector(".add-picture .fa-xmark")
-    .addEventListener("click", closeModal);
+
   document
     .querySelector(".add-picture a")
     .addEventListener("click", returnToPortfolioEdition);
   modal.setAttribute("aria-hidden", "true");
   modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);
-  modal.querySelector(".modal-close").removeEventListener("click", closeModal);
-  modal
+
+  modal.removeEventListener("click", openModalAddPicture);
+
+  modalAddPicture
+    .querySelector(".modal-close")
+    .addEventListener("click", closeModal);
+  modalAddPicture.addEventListener("click", closeModal);
+  modalAddPicture
     .querySelector(".modal-wrapper")
     .addEventListener("click", stopPropagation);
-  modal.removeEventListener("click", openModalAddPicture);
 };
 
 document
