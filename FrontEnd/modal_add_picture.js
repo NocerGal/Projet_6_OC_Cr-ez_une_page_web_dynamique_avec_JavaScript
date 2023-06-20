@@ -129,7 +129,7 @@ window.addEventListener("keydown", function (e) {
     focusInModal(e);
   }
 });
-
+console.log("ok");
 document
   .querySelector(".add-picture #photo-upload")
   .addEventListener("change", function (e) {
