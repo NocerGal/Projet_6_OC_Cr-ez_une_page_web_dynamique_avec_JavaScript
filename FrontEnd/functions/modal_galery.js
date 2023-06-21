@@ -5,10 +5,14 @@ import { erasePicture } from "./erasePicture.js";
 export function generationCurrentPhotoGallery() {
   const selectModalGalery = "#galery-modal";
 
-  creationFigureElement(
-    JSON.parse(sessionStorage.getItem("photosForGallery")),
-    selectModalGalery
-  );
+  if (JSON.parse(sessionStorage.getItem("photosForGallery")) === null) {
+    return;
+  } else {
+    creationFigureElement(
+      JSON.parse(sessionStorage.getItem("photosForGallery")),
+      selectModalGalery
+    );
+  }
 
   document
     .querySelectorAll("#galery-modal figure figcaption")

@@ -6,6 +6,7 @@ import { logout } from "./functions/logout.js";
 import { creationFigureElement } from "./functions/initializationCreationFigureElement.js";
 import { deleteAllGallery } from "./functions/deleteGalery.js";
 import { removeModal } from "./removeModal.js";
+import { eraseAllGallery } from "./functions/eraseAllGallery.js";
 
 logout();
 
@@ -22,6 +23,10 @@ const openModal = function (e) {
   modal.removeAttribute("aria-hidden");
   modal.setAttribute("aria-modal", "true");
   modal.querySelector(".add-pics").addEventListener("click", removeModal);
+  modal
+    .querySelector(".delete-galery")
+    .addEventListener("click", eraseAllGallery);
+
   // Permet lorsqu'on click en dehors de la fenêtre modal de fermer la fen^etre modale
   modal.addEventListener("click", closeModal);
   modal.querySelector(".modal-close").addEventListener("click", closeModal);
@@ -44,6 +49,9 @@ const closeModal = function (e) {
   modal.querySelector(".modal-close").removeEventListener("click", closeModal);
   document.querySelector(".add-pics").removeEventListener("click", removeModal);
   modal
+    .querySelector(".delete-galery")
+    .removeEventListener("click", eraseAllGallery);
+  modal
     .querySelector(".modal-wrapper")
     .addEventListener("click", stopPropagation);
   const hideModal = function () {
@@ -57,10 +65,14 @@ const closeModal = function (e) {
     .querySelectorAll("#portfolio .gallery figure")
     .forEach((picture) => picture.remove());
 
-  creationFigureElement(
-    JSON.parse(sessionStorage.getItem("photosForGallery")),
-    ".gallery"
-  );
+  if (JSON.parse(sessionStorage.getItem("photosForGallery")) === null) {
+    return;
+  } else {
+    creationFigureElement(
+      JSON.parse(sessionStorage.getItem("photosForGallery")),
+      ".gallery"
+    );
+  }
 };
 
 const stopPropagation = function (e) {

@@ -6,6 +6,7 @@ import { firstGenerationElements } from "./functions/generationFigureElements.js
 import { dataURLtoFile } from "./functions/dataURLtoFile.js";
 import { displayPictures } from "./displayPictures.js";
 import { addNewPicture } from "./addNewPicture.js";
+import { eraseAllGallery } from "./functions/eraseAllGallery.js";
 
 const openModalAddPicture = function () {
   let modal = document.querySelector("#modal");
@@ -58,6 +59,7 @@ const closeModal = function (e) {
     .addEventListener("click", stopPropagation);
 
   const hideModal = function () {
+    debugger;
     modalAddPicture.removeEventListener("animationend", hideModal);
     modalAddPicture.style.display = "none";
     modalAddPicture = null;
@@ -84,6 +86,10 @@ const returnToPortfolioEdition = function (e) {
   let focusables = Array.from(modal.querySelectorAll(focusableSelector));
   let previouslyFocusedElement = document.querySelector(":focus");
   focusables[0].focus();
+  previousModal
+    .querySelector(".delete-galery")
+    .addEventListener("click", eraseAllGallery);
+
   previousModal.style.display = null;
   previousModal.removeAttribute("aria-hidden");
   previousModal.setAttribute("aria-modal", "true");
@@ -132,7 +138,7 @@ window.addEventListener("keydown", function (e) {
     focusInModal(e);
   }
 });
-console.log("ok");
+
 document
   .querySelector(".add-picture #photo-upload")
   .addEventListener("change", function (e) {
@@ -164,7 +170,16 @@ document
     const data = new FormData(form);
     const title = data.get("titre");
     const categorie = document.querySelector(".add-picture form select").value;
+
+    const imageUrl = sessionStorage.getItem("preview-image");
+    const indexCategorie = categories.findIndex(
+      (index) => index.name == categorie
+    );
+    const idCategories = indexCategorie + 1;
+    const userId = JSON.parse(sessionStorage.getItem("id"));
+    const nameObjet = categories[indexCategorie].name;
     let indexPhotosToErase;
+
     if (JSON.parse(sessionStorage.getItem("photosToErase")) === null) {
       indexPhotosToErase = 0;
     } else {
@@ -174,13 +189,6 @@ document
       JSON.parse(sessionStorage.getItem("photosForGallery")).length +
       indexPhotosToErase +
       1;
-    const imageUrl = sessionStorage.getItem("preview-image");
-    const indexCategorie = categories.findIndex(
-      (index) => index.name == categorie
-    );
-    const idCategories = indexCategorie + 1;
-    const userId = JSON.parse(sessionStorage.getItem("id"));
-    const nameObjet = categories[indexCategorie].name;
 
     const newCategorie = new classCategory(idCategories, nameObjet);
     const newPictureAdded = new classPicture(
@@ -192,26 +200,32 @@ document
       newCategorie
     );
 
-    if (sessionStorage.getItem("photosToPublish") === null) {
-      let arr = [];
-      arr.push(new classPicture(id, title, imageUrl, idCategories, userId));
-      sessionStorage.setItem("photosToPublish", JSON.stringify(arr));
+    if (imageUrl === null) {
+      return;
     } else {
-      const photoToPublish = new classPicture(
-        id,
-        title,
-        imageUrl,
-        idCategories,
-        userId
-      );
-      let listPhotoToPublish = JSON.parse(
-        sessionStorage.getItem("photosToPublish")
-      );
-      listPhotoToPublish.push(photoToPublish);
-      sessionStorage.setItem(
-        "photosToPublish",
-        JSON.stringify(listPhotoToPublish)
-      );
+      debugger;
+      if (sessionStorage.getItem("photosToPublish") === null) {
+        let arr = [];
+        arr.push(new classPicture(id, title, imageUrl, idCategories, userId));
+        sessionStorage.setItem("photosToPublish", JSON.stringify(arr));
+      } else {
+        const photoToPublish = new classPicture(
+          id,
+          title,
+          imageUrl,
+          idCategories,
+          userId
+        );
+        let listPhotoToPublish = JSON.parse(
+          sessionStorage.getItem("photosToPublish")
+        );
+        listPhotoToPublish.push(photoToPublish);
+        sessionStorage.setItem(
+          "photosToPublish",
+          JSON.stringify(listPhotoToPublish)
+        );
+      }
+      addNewPicture(newPictureAdded);
+      sessionStorage.removeItem("preview-image");
     }
-    addNewPicture(newPictureAdded);
   });

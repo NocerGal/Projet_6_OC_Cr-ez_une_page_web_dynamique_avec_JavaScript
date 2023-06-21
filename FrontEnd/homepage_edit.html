@@ -130,14 +130,15 @@
                 id="photo-upload"
                 name="photo-upload"
                 accept="=image/png, image.jpg"
+                required
               />
               <span>jpg, png : 4mo max</span>
             </div>
             <form>
               <label for="titre">Titre</label>
-              <input type="text" name="titre" id="titre" />
+              <input type="text" name="titre" id="titre" required />
               <label for="categorie">Categorie</label>
-              <select name="categorie" id="categorie">
+              <select name="categorie" id="categorie" required>
                 <option disabled selected value></option>
                 <option value="Objets">Objets</option>
                 <option value="Appartements">Appartements</option>
