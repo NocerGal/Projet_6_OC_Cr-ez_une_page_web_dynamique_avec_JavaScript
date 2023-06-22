@@ -10,6 +10,7 @@ export function creationFigureElement(picsRegardingFilter, container) {
     imageElement.alt = picsRegardingFilter[i].title;
     figcaptionElement.innerHTML = picsRegardingFilter[i].title;
 
+    imageElement.classList = "placeholder";
     figureElement.appendChild(imageElement);
     figureElement.appendChild(figcaptionElement);
 

@@ -201,7 +201,6 @@ document
     );
 
     if (imageUrl === null) {
-      return;
     } else {
       debugger;
       if (sessionStorage.getItem("photosToPublish") === null) {

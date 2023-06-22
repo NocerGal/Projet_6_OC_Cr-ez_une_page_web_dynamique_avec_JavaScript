@@ -1,7 +1,11 @@
 export function eraseAllGallery() {
-  storageAllPics();
-  eraseNotPublisedPictures();
-  erasePictureDisplayed();
+  if (confirm("Voulez-vous vraiment supprimer la gallerie?") != true) {
+    return;
+  } else {
+    storageAllPics();
+    eraseNotPublisedPictures();
+    erasePictureDisplayed();
+  }
 }
 
 const storageAllPics = function () {
