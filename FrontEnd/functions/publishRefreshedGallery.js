@@ -23,5 +23,6 @@ document.querySelector(".model-publish").addEventListener("click", () => {
 
     sessionStorage.removeItem("photosToPublish");
     sessionStorage.removeItem("photosToErase");
+    alert("Modification enregistrées");
   }
 });

@@ -166,6 +166,7 @@ document
 document
   .querySelector(".add-picture form")
   .addEventListener("submit", function (e) {
+    e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
     const title = data.get("titre");
@@ -178,13 +179,12 @@ document
     const idCategories = indexCategorie + 1;
     const userId = JSON.parse(sessionStorage.getItem("id"));
     const nameObjet = categories[indexCategorie].name;
-    let indexPhotosToErase;
+    let indexPhotosToErase = 0;
 
-    if (JSON.parse(sessionStorage.getItem("photosToErase")) === null) {
-      indexPhotosToErase = 0;
-    } else {
+    if (JSON.parse(sessionStorage.getItem("photosToErase")) !== null) {
       indexPhotosToErase = sessionStorage.getItem("photosToErase").length;
     }
+
     const id =
       JSON.parse(sessionStorage.getItem("photosForGallery")).length +
       indexPhotosToErase +
@@ -200,9 +200,7 @@ document
       newCategorie
     );
 
-    if (imageUrl === null) {
-    } else {
-      debugger;
+    if (imageUrl !== null) {
       if (sessionStorage.getItem("photosToPublish") === null) {
         let arr = [];
         arr.push(new classPicture(id, title, imageUrl, idCategories, userId));
@@ -226,5 +224,11 @@ document
       }
       addNewPicture(newPictureAdded);
       sessionStorage.removeItem("preview-image");
+    }
+    const photoUpload = document.querySelector("#photo-upload");
+    if (photoUpload.files.length > 0) {
+      form.submit();
+    } else {
+      // Mettre message appendChild il faut une image
     }
   });

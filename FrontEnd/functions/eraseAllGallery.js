@@ -2,24 +2,20 @@ export function eraseAllGallery() {
   if (confirm("Voulez-vous vraiment supprimer la gallerie?") != true) {
     return;
   } else {
-    storageAllPics();
-    eraseNotPublisedPictures();
-    erasePictureDisplayed();
+    storeAllPics();
+    eraseUnpublishedPictures();
+    eraseDisplayedPictures();
   }
 }
 
-const storageAllPics = function () {
+function storeAllPics() {
   const selectPicture = document.querySelectorAll("#galery-modal figure img");
-
   selectPicture.forEach((title) => pushPicture(title.getAttribute("alt")));
-};
+}
 
-const pushPicture = function (title) {
-  let arr = [];
-  arr.push(title);
-
+function pushPicture(title) {
   if (sessionStorage.getItem("galleryToErase") === null) {
-    sessionStorage.setItem("galleryToErase", JSON.stringify(arr));
+    sessionStorage.setItem("galleryToErase", JSON.stringify([title]));
     return;
   }
   const sessionPhotoToErase = JSON.parse(
@@ -27,9 +23,9 @@ const pushPicture = function (title) {
   );
   sessionPhotoToErase.push(title);
   sessionStorage.setItem("galleryToErase", JSON.stringify(sessionPhotoToErase));
-};
+}
 
-const eraseNotPublisedPictures = function () {
+function eraseUnpublishedPictures() {
   const sessionPhotoToErase = JSON.parse(
     sessionStorage.getItem("galleryToErase")
   );
@@ -54,12 +50,12 @@ const eraseNotPublisedPictures = function () {
       }
     }
   }
-};
+}
 
-const erasePictureDisplayed = function () {
+function eraseDisplayedPictures() {
   document
     .querySelectorAll("#galery-modal figure")
     .forEach((pic) => pic.remove());
 
   sessionStorage.removeItem("photosForGallery");
-};
+}

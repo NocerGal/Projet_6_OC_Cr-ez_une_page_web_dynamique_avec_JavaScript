@@ -782,7 +782,6 @@ input[type="file"] {
 }
 
 .gallery figure {
-  height: 490px;
   width: 367px;
   background-image: url("./images/placehoder.jpeg");
   background-repeat: no-repeat;
@@ -792,6 +791,5 @@ input[type="file"] {
 }
 
 .gallery figure img {
-  height: 100%;
-  font-size: 0;
+  height: 490px;
 }
