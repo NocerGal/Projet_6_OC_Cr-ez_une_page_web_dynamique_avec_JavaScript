@@ -783,9 +783,6 @@ input[type="file"] {
 
 .gallery figure {
   width: 367px;
-  background-image: url("./images/placehoder.jpeg");
-  background-repeat: no-repeat;
-  background-position: center;
   display: flex;
   flex-direction: column;
 }

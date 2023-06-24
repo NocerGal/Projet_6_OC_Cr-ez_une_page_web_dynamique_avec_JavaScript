@@ -1,3 +1,5 @@
+import { classPicture } from "../classPicture.js";
+
 export function eraseAllGallery() {
   if (confirm("Voulez-vous vraiment supprimer la gallerie?") != true) {
     return;
@@ -10,24 +12,27 @@ export function eraseAllGallery() {
 
 function storeAllPics() {
   const selectPicture = document.querySelectorAll("#galery-modal figure img");
-  selectPicture.forEach((title) => pushPicture(title.getAttribute("alt")));
+  selectPicture.forEach((id) => pushPicture(id.getAttribute("class")));
 }
 
-function pushPicture(title) {
-  if (sessionStorage.getItem("galleryToErase") === null) {
-    sessionStorage.setItem("galleryToErase", JSON.stringify([title]));
+function pushPicture(id) {
+  let arr = [];
+  arr.push(new classPicture(id));
+
+  if (sessionStorage.getItem("photosToErase") === null) {
+    sessionStorage.setItem("photosToErase", JSON.stringify(arr));
     return;
   }
   const sessionPhotoToErase = JSON.parse(
-    sessionStorage.getItem("galleryToErase")
+    sessionStorage.getItem("photosToErase")
   );
-  sessionPhotoToErase.push(title);
-  sessionStorage.setItem("galleryToErase", JSON.stringify(sessionPhotoToErase));
+  sessionPhotoToErase.push(new classPicture(id));
+  sessionStorage.setItem("photosToErase", JSON.stringify(sessionPhotoToErase));
 }
 
 function eraseUnpublishedPictures() {
   const sessionPhotoToErase = JSON.parse(
-    sessionStorage.getItem("galleryToErase")
+    sessionStorage.getItem("photosToErase")
   );
 
   for (let i = 0; sessionPhotoToErase.length > i; i++) {
@@ -38,7 +43,7 @@ function eraseUnpublishedPictures() {
         sessionStorage.getItem("photosToPublish")
       );
       let index = photoToPublish.findIndex(
-        (e) => sessionPhotoToErase[i] == e.title
+        (e) => sessionPhotoToErase[i] == e.id
       );
       if (JSON.stringify(photoToPublish.splice(index, 0) === null)) {
         sessionStorage.removeItem("photosToPublish");
