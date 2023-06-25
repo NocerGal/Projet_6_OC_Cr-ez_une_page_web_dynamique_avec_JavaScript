@@ -12,7 +12,7 @@ export function publishNewGallery(picture, index) {
   formData.append("title", title);
   formData.append("category", category);
 
-  let request = fetch("./api/works", {
+  let request = fetch("http://localhost:5678/api/works", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
