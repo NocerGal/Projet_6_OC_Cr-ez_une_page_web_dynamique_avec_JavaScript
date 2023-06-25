@@ -1,4 +1,4 @@
-const apiCategories = await fetch("http://localhost:5678/api/categories");
+const apiCategories = await fetch("./api/categories");
 const categories = await apiCategories.json();
 
 export function filterCreation() {
