@@ -8,7 +8,7 @@ export function publishNewGallery(picture, index) {
     .title;
   const category = JSON.parse(sessionStorage.getItem("photosToPublish"))[index]
     .categoryId;
-  formData.append("image", dataURLtoFile(photo, "Bonjour Test"));
+  formData.append("image", dataURLtoFile(photo, title));
   formData.append("title", title);
   formData.append("category", category);
 

@@ -59,7 +59,6 @@ const closeModal = function (e) {
     .addEventListener("click", stopPropagation);
 
   const hideModal = function () {
-    debugger;
     modalAddPicture.removeEventListener("animationend", hideModal);
     modalAddPicture.style.display = "none";
     modalAddPicture = null;
