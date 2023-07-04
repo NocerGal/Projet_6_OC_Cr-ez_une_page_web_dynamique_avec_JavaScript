@@ -152,7 +152,6 @@ document
 
     imagePicture.push(files);
     reader.readAsDataURL(this.files[0]);
-    sessionStorage.setItem("preview-image", reader.result);
 
     reader.addEventListener("load", () => {
       sessionStorage.setItem("preview-image", reader.result);
@@ -227,7 +226,5 @@ document
     const photoUpload = document.querySelector("#photo-upload");
     if (photoUpload.files.length > 0) {
       form.submit();
-    } else {
-      // Mettre message appendChild il faut une image
     }
   });

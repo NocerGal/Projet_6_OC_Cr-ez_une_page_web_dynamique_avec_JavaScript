@@ -1,4 +1,5 @@
 import { generateIcons } from "./modal_galery.js";
+import { creationFigureElement } from "./initializationCreationFigureElement.js";
 
 export function erasePicture(e) {
   let sessionStorageGallery = JSON.parse(
@@ -61,4 +62,11 @@ export function erasePicture(e) {
   document
     .querySelectorAll("#galery-modal figure")
     .forEach((figure) => generateIcons(figure));
+
+  if (JSON.parse(sessionStorage.getItem("photosForGallery")) != null) {
+    creationFigureElement(
+      JSON.parse(sessionStorage.getItem("photosForGallery")),
+      ".gallery"
+    );
+  }
 }

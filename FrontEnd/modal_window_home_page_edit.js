@@ -3,8 +3,6 @@ import {
   cleanPhotoGallery,
 } from "./functions/modal_galery.js";
 import { logout } from "./functions/logout.js";
-import { creationFigureElement } from "./functions/initializationCreationFigureElement.js";
-import { deleteAllGallery } from "./functions/deleteGalery.js";
 import { removeModal } from "./removeModal.js";
 import { eraseAllGallery } from "./functions/eraseAllGallery.js";
 
@@ -41,7 +39,6 @@ const closeModal = function (e) {
   if (modal === null) return;
   if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
   e.preventDefault();
-  cleanPhotoGallery();
 
   modal.setAttribute("aria-hidden", "true");
   modal.removeAttribute("aria-modal");
@@ -59,20 +56,6 @@ const closeModal = function (e) {
     modal.removeEventListener("animationend", hideModal);
   };
   modal.addEventListener("animationend", hideModal);
-
-  console.log(modal);
-  document
-    .querySelectorAll("#portfolio .gallery figure")
-    .forEach((picture) => picture.remove());
-
-  if (JSON.parse(sessionStorage.getItem("photosForGallery")) === null) {
-    return;
-  } else {
-    creationFigureElement(
-      JSON.parse(sessionStorage.getItem("photosForGallery")),
-      ".gallery"
-    );
-  }
 };
 
 const stopPropagation = function (e) {

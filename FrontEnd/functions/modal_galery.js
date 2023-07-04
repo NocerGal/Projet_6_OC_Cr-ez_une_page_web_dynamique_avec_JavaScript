@@ -1,6 +1,7 @@
 import { photos } from "./constants/index.js";
 import { creationFigureElement } from "./initializationCreationFigureElement.js";
 import { erasePicture } from "./erasePicture.js";
+import { cleanElements } from "./cleanElement.js";
 
 export function generationCurrentPhotoGallery() {
   const selectModalGalery = "#galery-modal";
@@ -38,6 +39,11 @@ export function generateIcons(currentFigure) {
 
   trashDiv.addEventListener("click", function (e) {
     erasePicture(e);
+    cleanElements();
+    creationFigureElement(
+      JSON.parse(sessionStorage.getItem("photosForGallery")),
+      ".gallery"
+    );
   });
 
   multiCrossDiv.addEventListener("click", function (e) {
